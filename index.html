@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Credits to UsefulProgrammer for the guided tutorial -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./js/marked.js"></script>
+
+    <title>Markdown Previewer</title>
+    <link rel="stylesheet" type="text/css" href="./dist/css/main.css" />
+    <script>
+      function updatePreview() {
+        let previewText = document.getElementById("preview");
+        let editorText = document.getElementById("editor").value;
+        let markedText = marked(editorText);
+        previewText.innerHTML = markedText;
+      };
+      function setDefaultText() {
+        let placeholderText = `
+# This is a placeholder
+## Enter your preferred text
+[Want to learn more about programming? Check this link](www.freecodecamp.org)
+<dl>
+  <dt>Definition list</dt>
+  <dd>Is something people use sometimes.</dd>
+
+  <dt>Markdown in HTML</dt>
+  <dd>Does *not* work **very** well. Use HTML <em>tags</em>.</dd>
+</dl>
+
+\`Code Block\`
+
+\`\`\`
+let myArr = ['Hello', 'There']
+\`\`\`
+
+
+- These are 
+- Sample 
+- Bulletpoints 
+
+> This is a block quote
+
+![Sample Image](https://a.thumbs.redditmedia.com/ygBNf_jZbDdxXnHEW2Xs0vgSL7UVELUnMWvnEKb_Xm8.png "Ben")
+        
+**BOLD**
+        `;
+        let editorText = document.getElementById("editor");
+        let previewText = document.getElementById("preview");
+        editorText.value = placeholderText;
+        previewText.innerHTML = marked(placeholderText);
+      }
+    </script>
+  </head>
+  <body onload="setDefaultText()">
+    <div class="fluid-container">
+      <div class="row">
+        <div class="col text-center bg-warning" id='header-row'>
+          <h1>Markdown Previewer by Hans Walter</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6" id='editor-col'>
+          <h2>Write your text here:</h2>
+          <textarea class="form-control" id="editor" onkeyup="updatePreview()"></textarea>
+        </div>
+        <div class="col-6" id='preview-col'>
+          <h2>Here's your result:</h2>
+          <div id='preview'></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+  </body>
+</html>
